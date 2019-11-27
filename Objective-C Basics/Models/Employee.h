@@ -16,15 +16,11 @@
     @private
     NSString * firstName;
     NSString * lastName;
-    
-    @public
-    NSString * fullName;
-    int salary;
 }
 
-@property (strong, nonatomic, readonly) NSString * fullName;
-@property (nonatomic) int salary;
+@property (readonly) NSString * fullname;
+@property int salary;
 
--(id)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary;
--(void)printToNSLog;
+- (id)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary;
+- (void)printToNSLog;
 @end

@@ -15,16 +15,16 @@
 #import "Employee.h"
 
 @interface Organization : NSObject {
-    NSString * name;
     @private
     NSArray<Employee *> * employees;
 }
 
-@property (strong, nonatomic) NSString * name;
+@property NSString * name;
 
 -(id)initWithName:(NSString *)name;
 -(void)addEmployeeWithName:(NSString *)name;
 -(void)addEmployee:(Employee *)employee;
+-(void)removeEmployee:(Employee *)employee;
 -(double)calculateAverageSalary;
 -(Employee *)employeeWithLowestSalary;
 -(NSArray<Employee *> *)employeesWithSalary:(int)salary tolerance:(int)tolerance;
