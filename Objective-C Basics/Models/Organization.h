@@ -21,7 +21,6 @@
 }
 
 @property (strong, nonatomic) NSString * name;
-@property (strong, nonatomic) NSArray<Employee *> * employees;
 
 -(id)initWithName:(NSString *)name;
 -(void)addEmployeeWithName:(NSString *)name;
