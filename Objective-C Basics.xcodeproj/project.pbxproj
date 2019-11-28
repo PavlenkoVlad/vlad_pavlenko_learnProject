@@ -17,6 +17,7 @@
 		D6B26D73238EB49500C7D314 /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B26D72238EB49500C7D314 /* Organization.m */; };
 		D6DF3FA5238FDA7200098E81 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF3FA4238FDA7200098E81 /* MainViewController.m */; };
 		D6DF3FA8238FE07700098E81 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF3FA7238FE07700098E81 /* DetailViewController.m */; };
+		D6DF3FAE238FF81400098E81 /* CreateEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DF3FAD238FF81400098E81 /* CreateEmployeeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,9 @@
 		D6DF3FA4238FDA7200098E81 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		D6DF3FA6238FE07700098E81 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		D6DF3FA7238FE07700098E81 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		D6DF3FAC238FF81400098E81 /* CreateEmployeeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateEmployeeViewController.h; sourceTree = SOURCE_ROOT; };
+		D6DF3FAD238FF81400098E81 /* CreateEmployeeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateEmployeeViewController.m; sourceTree = SOURCE_ROOT; };
+		D6DF3FAF2390016E00098E81 /* EmployeesDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmployeesDataSource.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,9 @@
 		D6B26D53238E8B8900C7D314 /* Objective-C Basics */ = {
 			isa = PBXGroup;
 			children = (
+				D6DF3FAC238FF81400098E81 /* CreateEmployeeViewController.h */,
+				D6DF3FAD238FF81400098E81 /* CreateEmployeeViewController.m */,
+				D6DF3FAF2390016E00098E81 /* EmployeesDataSource.h */,
 				D6DF3FA3238FDA7200098E81 /* MainViewController.h */,
 				D6DF3FA4238FDA7200098E81 /* MainViewController.m */,
 				D6B26D6D238E8C1800C7D314 /* Models */,
@@ -173,6 +180,7 @@
 				D6DF3FA5238FDA7200098E81 /* MainViewController.m in Sources */,
 				D6B26D71238E9CB800C7D314 /* Employee.m in Sources */,
 				D6B26D56238E8B8900C7D314 /* AppDelegate.m in Sources */,
+				D6DF3FAE238FF81400098E81 /* CreateEmployeeViewController.m in Sources */,
 				D6B26D67238E8B8C00C7D314 /* main.m in Sources */,
 				D6B26D59238E8B8900C7D314 /* SceneDelegate.m in Sources */,
 				D6DF3FA8238FE07700098E81 /* DetailViewController.m in Sources */,
