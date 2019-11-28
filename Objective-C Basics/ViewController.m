@@ -14,8 +14,17 @@
 
 @implementation ViewController
 
+@synthesize textField;
+@synthesize label;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (IBAction)sendButtonPressed:(UIButton *)sender {
+    if (textField.text && textField.text.length > 0) {
+        [label setText:textField.text];
+    }
 }
 
 @end
