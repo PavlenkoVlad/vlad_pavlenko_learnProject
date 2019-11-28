@@ -14,12 +14,10 @@
 
 #import "Employee.h"
 
-@interface Organization : NSObject {
-    @private
-    NSArray<Employee *> * employees;
-}
+@interface Organization : NSObject
 
 @property NSString * name;
+@property (readonly) NSArray<Employee *> * employees;
 
 -(id)initWithName:(NSString *)name;
 -(void)addEmployeeWithName:(NSString *)name;

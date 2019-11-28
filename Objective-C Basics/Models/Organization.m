@@ -16,6 +16,7 @@
 @implementation Organization
 
 @synthesize name;
+@synthesize employees;
 
 - (id)initWithName:(NSString *)name {
     self = [super init];
