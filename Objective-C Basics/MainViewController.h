@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Organization.h"
+#import "EmployeesDataSource.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MainViewController : UITableViewController
+@interface MainViewController : UITableViewController<EmployeesDataSource>
 
 @property Organization * organization;
 
