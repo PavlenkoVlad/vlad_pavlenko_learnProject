@@ -43,6 +43,9 @@
     NSArray * employeesWithSalaryTolerance = [organization employeesWithSalary:700 tolerance:500];
     NSLog(@"employeesWithSalaryTolerance:%@", employeesWithSalaryTolerance);
     
+    [organization removeEmployee:employee];
+    [organization printToNSLog];
+    
     return YES;
 }
 

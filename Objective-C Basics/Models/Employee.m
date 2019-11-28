@@ -10,27 +10,25 @@
 #import "Employee.h"
 
 @interface Employee()
-    @property (strong, nonatomic, readwrite) NSString * fullname;
+
 @end
 
 @implementation Employee
 
-@synthesize firstName;
-@synthesize lastName;
-@synthesize fullname;
-@synthesize salary;
+@synthesize fullname = _fullname;
+@synthesize salary = _salary;
 
--(id)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary {
+- (id)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary {
     self = [super init];
-    self.firstName = firstName;
-    self.lastName = lastName;
-    self.fullname = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
-    self.salary = salary;
+    self->firstName = firstName;
+    self->lastName = lastName;
+    _fullname = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
+    _salary = salary;
     return self;
 }
 
--(void)printToNSLog {
-    NSLog(@"\nEmployee\nfirstName:%@\nlastName:%@\nfullName:%@\nsalary:%d", firstName, lastName, fullname, salary);
+- (void)printToNSLog {
+    NSLog(@"\nEmployee\nfirstName:%@\nlastName:%@\nfullName:%@\nsalary:%d", firstName, lastName, _fullname, _salary);
 }
 
 @end
