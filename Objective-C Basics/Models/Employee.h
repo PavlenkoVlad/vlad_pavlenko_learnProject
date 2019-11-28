@@ -14,10 +14,10 @@
 
 @interface Employee : NSObject {
     @private
-    NSString * firstName;
     NSString * lastName;
 }
 
+@property (readonly) NSString * firstName;
 @property (readonly) NSString * fullname;
 @property int salary;
 
