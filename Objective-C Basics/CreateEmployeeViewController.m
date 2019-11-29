@@ -19,6 +19,7 @@
 @synthesize lastNameTextField;
 @synthesize salaryTextField;
 @synthesize delegate;
+@synthesize employee;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,8 +31,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier compare:@"saveEmployeeDone"] == NSOrderedSame) {
         if (firstNameTextField.text && firstNameTextField.text.length > 0 && lastNameTextField.text && lastNameTextField.text.length > 0 && salaryTextField.text && salaryTextField.text.length > 0) {
-            int salary = salaryTextField.text.intValue;
-            [delegate addEmployee:[[Employee alloc] initWithFirstName:firstNameTextField.text lastName:lastNameTextField.text salary:salary]];
+            [delegate addEmployee:[employee insertWithFirstName:firstNameTextField.text lastName:lastNameTextField.text salary:salaryTextField.text.intValue]];
         }
     }
 }

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DetailViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
-@property Employee * employee;
+@property EmployeeMO * employeeMO;
 
 @end
 

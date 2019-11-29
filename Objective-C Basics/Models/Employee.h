@@ -12,15 +12,16 @@
 
 #endif /* Employee_h */
 
-@interface Employee : NSObject {
-    @private
-    NSString * lastName;
-}
+#import "EmployeeMO+CoreDataClass.h"
+#import "OrganizationMO+CoreDataClass.h"
 
-@property (readonly) NSString * firstName;
-@property (readonly) NSString * fullname;
-@property int salary;
+@interface Employee : NSObject
 
-- (id)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary;
-- (void)printToNSLog;
+@property (readonly) NSManagedObjectContext *context;
+
+-(id)initWithContext:(NSManagedObjectContext *)context;
+- (EmployeeMO *)insertWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary;
+
+-(void)saveContext;
+
 @end

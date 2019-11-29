@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Employee.h"
+#import "EmployeeMO+CoreDataClass.h"
+#import "OrganizationMO+CoreDataClass.h"
 
 @interface Employee()
 
@@ -15,21 +17,30 @@
 
 @implementation Employee
 
-@synthesize firstName = _firstName;
-@synthesize fullname = _fullname;
-@synthesize salary = _salary;
+@synthesize context = _context;
 
-- (id)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary {
+-(id)initWithContext:(NSManagedObjectContext *)context {
     self = [super init];
-    _firstName = firstName;
-    self->lastName = lastName;
-    _fullname = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
-    _salary = salary;
+    _context = context;
     return self;
 }
 
-- (void)printToNSLog {
-    NSLog(@"\nEmployee\nfirstName:%@\nlastName:%@\nfullName:%@\nsalary:%d", _firstName, lastName, _fullname, _salary);
+- (EmployeeMO *)insertWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary {
+    EmployeeMO *employee = [NSEntityDescription insertNewObjectForEntityForName:@"Employee" inManagedObjectContext:_context];
+    employee.firstName = firstName;
+    employee.lastName = lastName;
+    employee.fullName = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
+    employee.salary = salary;
+    [self saveContext];
+    return employee;
+}
+
+- (void)saveContext {
+    NSError *error = nil;
+    if ([_context hasChanges] && ![_context save:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        abort();
+    }
 }
 
 @end

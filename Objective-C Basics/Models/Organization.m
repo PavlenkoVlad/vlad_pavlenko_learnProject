@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Organization.h"
+#import "EmployeeMO+CoreDataClass.h"
+#import "EmployeeMO+CoreDataProperties.h"
+#import "OrganizationMO+CoreDataClass.h"
+#import "OrganizationMO+CoreDataProperties.h"
 
 @interface Organization()
 
@@ -15,38 +19,44 @@
 
 @implementation Organization
 
-@synthesize name;
-@synthesize employees;
+@synthesize context = _context;
+@synthesize employee = _employee;
 
-- (id)initWithName:(NSString *)name {
+- (id)initWithContext:(NSManagedObjectContext *)context {
     self = [super init];
-    self->name = name;
-    employees = [NSArray new];
+    _context = context;
+    _employee = [[Employee alloc] initWithContext:_context];
     return self;
 }
 
-- (void)addEmployeeWithName:(NSString *)name {
+- (OrganizationMO *)insertWithName:(NSString *)name {
+    OrganizationMO *organization = [NSEntityDescription insertNewObjectForEntityForName:@"Organization" inManagedObjectContext:_context];
+    organization.name = name;
+    organization.employees = [NSSet new];
+    [self saveContext];
+    return organization;
+}
+
+- (void)addEmployeeWithName:(NSString *)name organization:(OrganizationMO *)organization{
     int salary = ((arc4random() % 490) + 10) * 10;
     NSArray * arrayOfFullNameComponents = [name componentsSeparatedByString:@" "];
-    Employee * newEmployee = [[Employee alloc] initWithFirstName:arrayOfFullNameComponents[0] lastName:arrayOfFullNameComponents[1] salary:salary];
-    [self addEmployee:newEmployee];
-
+    EmployeeMO *employee = [_employee insertWithFirstName:arrayOfFullNameComponents[0] lastName:arrayOfFullNameComponents[1] salary:salary];
+    [self addEmployee:employee organization:organization];
 }
 
-- (void)addEmployee:(Employee *)employee {
-    NSMutableArray * tempEmoloyeesArray = [[NSMutableArray alloc] init];
-    tempEmoloyeesArray = [NSMutableArray arrayWithArray:employees];
-    [tempEmoloyeesArray addObject:employee];
-    employees = [NSArray arrayWithArray:tempEmoloyeesArray];
+- (void)addEmployee:(EmployeeMO *)employee organization:(OrganizationMO *)organization {
+    [organization addEmployeesObject:employee];
+    //employee.organization = organization;
+    [self saveContext];
 }
 
-- (void)removeEmployee:(Employee *)employee {
-    NSMutableArray * tempEmployeesArray = [[NSMutableArray alloc] initWithArray:employees];
-    [tempEmployeesArray removeObject:employee];
-    employees = [[NSArray alloc] initWithArray:tempEmployeesArray];
+- (void)removeEmployee:(EmployeeMO *)employee organization:(OrganizationMO *)organization {
+    [organization removeEmployeesObject:employee];
+    [self saveContext];
 }
 
-- (double)calculateAverageSalary {
+- (double)calculateAverageSalary:(OrganizationMO *)organization {
+    NSSet *employees = organization.employees;
     int sumOfSalary = 0;
     for (id employee in employees) {
         sumOfSalary += [employee salary];
@@ -54,27 +64,33 @@
     return sumOfSalary / (double) employees.count;
 }
 
-- (Employee *)employeeWithLowestSalary {
+- (EmployeeMO *)employeeWithLowestSalary:(OrganizationMO *)organization{
+    NSSet *employees = organization.employees;
     NSSortDescriptor * descriptor = [[NSSortDescriptor alloc] initWithKey:@"salary" ascending:YES];
     NSArray * descriptorsArray = [[NSArray alloc] initWithObjects:descriptor, nil];
     NSArray * sortedEmployees = [employees sortedArrayUsingDescriptors:descriptorsArray];
     return sortedEmployees[0];
 }
 
--(NSArray<Employee *> *)employeesWithSalary:(int)salary tolerance:(int)tolerance {
+-(NSSet<Employee *> *)employeesWithSalary:(int)salary tolerance:(int)tolerance organization:(OrganizationMO *)organization {
     int upperBound = salary + tolerance;
     int bottomBound = salary - tolerance;
+    NSSet *employees = organization.employees;
     NSMutableArray<Employee *> * employeesWithSalaryArray = [NSMutableArray new];
     for (id employee in employees) {
         if ([employee salary] >= bottomBound && [employee salary] <= upperBound) {
             [employeesWithSalaryArray addObject:employee];
         }
     }
-    return [NSArray arrayWithArray:employeesWithSalaryArray];
+    return [NSSet setWithArray:employeesWithSalaryArray];
 }
 
-- (void)printToNSLog {
-    NSLog(@"\nOrganization\nname:%@\nemployees:%@", name, employees);
+- (void)saveContext {
+    NSError *error = nil;
+    if ([_context hasChanges] && ![_context save:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        abort();
+    }
 }
 
 @end

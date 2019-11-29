@@ -12,20 +12,24 @@
 
 #endif /* Organization_h */
 
+#import "OrganizationMO+CoreDataClass.h"
+#import "EmployeeMO+CoreDataClass.h"
 #import "Employee.h"
 
 @interface Organization : NSObject
 
-@property NSString * name;
-@property (readonly) NSArray<Employee *> * employees;
+@property (readonly) NSManagedObjectContext *context;
+@property (readonly) Employee *employee;
 
--(id)initWithName:(NSString *)name;
--(void)addEmployeeWithName:(NSString *)name;
--(void)addEmployee:(Employee *)employee;
--(void)removeEmployee:(Employee *)employee;
--(double)calculateAverageSalary;
--(Employee *)employeeWithLowestSalary;
--(NSArray<Employee *> *)employeesWithSalary:(int)salary tolerance:(int)tolerance;
--(void)printToNSLog;
+-(id)initWithContext:(NSManagedObjectContext *)context;
+-(OrganizationMO *)insertWithName:(NSString *)name;
+-(void)addEmployeeWithName:(NSString *)name organization:(OrganizationMO *)organization;
+-(void)addEmployee:(EmployeeMO *)employee organization:(OrganizationMO *)organization;
+-(void)removeEmployee:(EmployeeMO *)employee organization:(OrganizationMO *)organization;
+-(double)calculateAverageSalary:(OrganizationMO *)organization;
+-(EmployeeMO *)employeeWithLowestSalary: (OrganizationMO *)organization;
+-(NSSet<EmployeeMO *> *)employeesWithSalary:(int)salary tolerance:(int)tolerance organization:(OrganizationMO *)organization;
+
+-(void)saveContext;
 
 @end

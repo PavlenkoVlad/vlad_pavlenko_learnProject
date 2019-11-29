@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *salaryTextField;
 @property (weak, nonatomic) id<EmployeesDataSource> delegate;
+@property Employee *employee;
 
 @end
 

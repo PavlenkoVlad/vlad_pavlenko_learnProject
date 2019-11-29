@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D60D610523913A9600D8558F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D60D610323913A9600D8558F /* Model.xcdatamodeld */; };
 		D628BA4C2390190000B5EC52 /* CreateEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628BA4B2390190000B5EC52 /* CreateEmployeeViewController.m */; };
 		D6B26D56238E8B8900C7D314 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B26D55238E8B8900C7D314 /* AppDelegate.m */; };
 		D6B26D59238E8B8900C7D314 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B26D58238E8B8900C7D314 /* SceneDelegate.m */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D60D610423913A9600D8558F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D628BA4A239018F500B5EC52 /* CreateEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateEmployeeViewController.h; sourceTree = "<group>"; };
 		D628BA4B2390190000B5EC52 /* CreateEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateEmployeeViewController.m; sourceTree = "<group>"; };
 		D6B26D51238E8B8900C7D314 /* Objective-C Basics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Objective-C Basics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +87,7 @@
 				D6B26D57238E8B8900C7D314 /* SceneDelegate.h */,
 				D6B26D58238E8B8900C7D314 /* SceneDelegate.m */,
 				D6B26D5D238E8B8900C7D314 /* Main.storyboard */,
+				D60D610323913A9600D8558F /* Model.xcdatamodeld */,
 				D6DF3FA6238FE07700098E81 /* DetailViewController.h */,
 				D6DF3FA7238FE07700098E81 /* DetailViewController.m */,
 				D6B26D60238E8B8C00C7D314 /* Assets.xcassets */,
@@ -181,6 +184,7 @@
 				D6B26D71238E9CB800C7D314 /* Employee.m in Sources */,
 				D6B26D56238E8B8900C7D314 /* AppDelegate.m in Sources */,
 				D628BA4C2390190000B5EC52 /* CreateEmployeeViewController.m in Sources */,
+				D60D610523913A9600D8558F /* Model.xcdatamodeld in Sources */,
 				D6B26D67238E8B8C00C7D314 /* main.m in Sources */,
 				D6B26D59238E8B8900C7D314 /* SceneDelegate.m in Sources */,
 				D6DF3FA8238FE07700098E81 /* DetailViewController.m in Sources */,
@@ -373,6 +377,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D60D610323913A9600D8558F /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D60D610423913A9600D8558F /* Model.xcdatamodel */,
+			);
+			currentVersion = D60D610423913A9600D8558F /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D6B26D49238E8B8900C7D314 /* Project object */;
 }
