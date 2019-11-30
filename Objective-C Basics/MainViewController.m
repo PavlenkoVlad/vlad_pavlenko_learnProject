@@ -36,11 +36,19 @@
 -(void)initOrganization {
     organization = [[Organization alloc] initWithContext:context];
     NSError *error = nil;
-    organizationMO = [context executeFetchRequest:[OrganizationMO fetchRequest] error: &error][0];
-    if(!organizationMO) {
-        NSLog(@"Error fetching Employee objects: %@\n%@", [error description], [error userInfo]);
-        abort();
+    NSArray *organizationMOArray = [context executeFetchRequest:[OrganizationMO fetchRequest] error: &error];
+    if(organizationMOArray) {
+        organizationMO = organizationMOArray[0];
+    } else {
+        [self firstLaunchDataInit];
     }
+}
+
+-(void)firstLaunchDataInit {
+    organizationMO = [organization insertWithName:@"organization name"];
+    [organization addEmployeeWithName:@"firstName1 lastName1" organization:organizationMO];
+    [organization addEmployeeWithName:@"firstName2 lastName2" organization:organizationMO];
+    [organization addEmployeeWithName:@"firstName3 lastName3" organization:organizationMO];
 }
  
 #pragma mark - Table view data source
