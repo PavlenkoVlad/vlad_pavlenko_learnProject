@@ -37,10 +37,10 @@
     organization = [[Organization alloc] initWithContext:context];
     NSError *error = nil;
     NSArray *organizationMOArray = [context executeFetchRequest:[OrganizationMO fetchRequest] error: &error];
-    if(organizationMOArray) {
-        organizationMO = organizationMOArray[0];
-    } else {
+    if (!organizationMOArray || organizationMOArray.count == 0) {
         [self firstLaunchDataInit];
+    } else {
+        organizationMO = organizationMOArray[0];
     }
 }
 
