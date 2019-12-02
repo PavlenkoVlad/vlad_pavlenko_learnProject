@@ -7,6 +7,53 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Organization Info View Controller-->
+        <scene sceneID="SOl-eJ-1aA">
+            <objects>
+                <viewController id="6pb-bZ-zKF" customClass="OrganizationInfoViewController" customModule="Objective_C_Basics" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GQP-Or-orj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="l5P-Es-q19">
+                                <rect key="frame" x="20" y="418" width="374" height="60.333333333333314"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqM-wq-ei0">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ec6-83-DVR">
+                                        <rect key="frame" x="0.0" y="30.333333333333314" width="374" height="30"/>
+                                        <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Calculate salary sum">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="salarySumButtonPressed:" destination="6pb-bZ-zKF" eventType="touchUpInside" id="NkB-cp-IqT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="l5P-Es-q19" firstAttribute="leading" secondItem="RIF-qi-8DQ" secondAttribute="leading" constant="20" id="C9H-kH-ajb"/>
+                            <constraint firstItem="RIF-qi-8DQ" firstAttribute="trailing" secondItem="l5P-Es-q19" secondAttribute="trailing" constant="20" id="kYu-Rx-kgd"/>
+                            <constraint firstItem="l5P-Es-q19" firstAttribute="centerY" secondItem="GQP-Or-orj" secondAttribute="centerY" id="lxf-X5-Ej9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RIF-qi-8DQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ybR-W3-qcF"/>
+                    <connections>
+                        <outlet property="organizationInfoLabel" destination="cqM-wq-ei0" id="RFz-tv-jmH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vSS-Yw-tCm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1325" y="773"/>
+        </scene>
         <!--Employees-->
         <scene sceneID="1CC-fg-3wO">
             <objects>
@@ -43,6 +90,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Employees" id="Oqu-Go-8a4">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="jwj-EO-GZQ">
+                            <connections>
+                                <segue destination="6pb-bZ-zKF" kind="show" identifier="organizationInfo" id="atm-9X-O9K"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ShL-T0-irP">
                             <connections>
                                 <segue destination="Nmn-Qg-73O" kind="show" identifier="saveEmployee" id="q3E-fW-qiL"/>

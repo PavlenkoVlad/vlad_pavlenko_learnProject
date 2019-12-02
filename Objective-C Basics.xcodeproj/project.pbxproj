@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		5CE12409A4041530A2E1ACBC /* libPods-Objective-C Basics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2683F51BAE5815A1A4CEA96F /* libPods-Objective-C Basics.a */; };
+		D603D3AE239515990028AE27 /* OrganizationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D603D3AD239515990028AE27 /* OrganizationInfoViewController.swift */; };
 		D60D610523913A9600D8558F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D60D610323913A9600D8558F /* Model.xcdatamodeld */; };
 		D628BA4C2390190000B5EC52 /* CreateEmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D628BA4B2390190000B5EC52 /* CreateEmployeeViewController.m */; };
 		D6B26D56238E8B8900C7D314 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B26D55238E8B8900C7D314 /* AppDelegate.m */; };
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		2683F51BAE5815A1A4CEA96F /* libPods-Objective-C Basics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C Basics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC28DD6E16924C274E4180EE /* Pods-Objective-C Basics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C Basics.release.xcconfig"; path = "Target Support Files/Pods-Objective-C Basics/Pods-Objective-C Basics.release.xcconfig"; sourceTree = "<group>"; };
+		D603D3AA239515280028AE27 /* Objective-C Basics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objective-C Basics-Bridging-Header.h"; sourceTree = "<group>"; };
+		D603D3AD239515990028AE27 /* OrganizationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationInfoViewController.swift; sourceTree = "<group>"; };
 		D60D610423913A9600D8558F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D628BA4A239018F500B5EC52 /* CreateEmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateEmployeeViewController.h; sourceTree = "<group>"; };
 		D628BA4B2390190000B5EC52 /* CreateEmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateEmployeeViewController.m; sourceTree = "<group>"; };
@@ -68,7 +71,6 @@
 				D78E98499FDCCADD1C027B79 /* Pods-Objective-C Basics.debug.xcconfig */,
 				AC28DD6E16924C274E4180EE /* Pods-Objective-C Basics.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -101,6 +103,7 @@
 		D6B26D53238E8B8900C7D314 /* Objective-C Basics */ = {
 			isa = PBXGroup;
 			children = (
+				D603D3AD239515990028AE27 /* OrganizationInfoViewController.swift */,
 				D628BA4B2390190000B5EC52 /* CreateEmployeeViewController.m */,
 				D628BA4A239018F500B5EC52 /* CreateEmployeeViewController.h */,
 				D6DF3FAF2390016E00098E81 /* EmployeesDataSource.h */,
@@ -119,6 +122,7 @@
 				D6B26D62238E8B8C00C7D314 /* LaunchScreen.storyboard */,
 				D6B26D65238E8B8C00C7D314 /* Info.plist */,
 				D6B26D66238E8B8C00C7D314 /* main.m */,
+				D603D3AA239515280028AE27 /* Objective-C Basics-Bridging-Header.h */,
 			);
 			path = "Objective-C Basics";
 			sourceTree = "<group>";
@@ -167,6 +171,7 @@
 				TargetAttributes = {
 					D6B26D50238E8B8900C7D314 = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
 					};
 				};
 			};
@@ -251,6 +256,7 @@
 				D6B26D73238EB49500C7D314 /* Organization.m in Sources */,
 				D6DF3FA5238FDA7200098E81 /* MainViewController.m in Sources */,
 				D6B26D71238E9CB800C7D314 /* Employee.m in Sources */,
+				D603D3AE239515990028AE27 /* OrganizationInfoViewController.swift in Sources */,
 				D6B26D56238E8B8900C7D314 /* AppDelegate.m in Sources */,
 				D628BA4C2390190000B5EC52 /* CreateEmployeeViewController.m in Sources */,
 				D60D610523913A9600D8558F /* Model.xcdatamodeld in Sources */,
@@ -397,7 +403,9 @@
 			baseConfigurationReference = D78E98499FDCCADD1C027B79 /* Pods-Objective-C Basics.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = "Objective-C Basics/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -405,6 +413,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.examle.Objective-C-Basics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Objective-C Basics/Objective-C Basics-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -414,7 +425,9 @@
 			baseConfigurationReference = AC28DD6E16924C274E4180EE /* Pods-Objective-C Basics.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = "Objective-C Basics/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -422,6 +435,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.examle.Objective-C-Basics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Objective-C Basics/Objective-C Basics-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
