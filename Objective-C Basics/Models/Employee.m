@@ -25,12 +25,13 @@
     return self;
 }
 
-- (EmployeeMO *)insertWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary {
+- (EmployeeMO *)insertWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary dateOfBirth:(NSDate *)dateOfBirth {
     EmployeeMO *employee = [NSEntityDescription insertNewObjectForEntityForName:@"Employee" inManagedObjectContext:_context];
     employee.firstName = firstName;
     employee.lastName = lastName;
     employee.fullName = [[NSString alloc] initWithFormat:@"%@ %@", firstName, lastName];
     employee.salary = salary;
+    employee.dateOfBirth = dateOfBirth;
     [self saveContext];
     return employee;
 }

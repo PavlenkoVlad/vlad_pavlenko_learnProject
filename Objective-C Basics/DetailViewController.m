@@ -21,7 +21,11 @@
     [super viewDidLoad];
     
     self.title = employeeMO.fullName;
-    [detailLabel setText:[NSString stringWithFormat:@"%@'s salaty is %d", employeeMO.firstName, employeeMO.salary]];
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    NSString *dateOfBirth = [dateFormatter stringFromDate:employeeMO.dateOfBirth];
+    [detailLabel setText:[NSString stringWithFormat:@"%@'s salaty is %d\nDate Of Birth: %@", employeeMO.firstName, employeeMO.salary, dateOfBirth]];
 }
 
 @end

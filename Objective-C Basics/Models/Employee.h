@@ -20,7 +20,7 @@
 @property (readonly) NSManagedObjectContext *context;
 
 -(id)initWithContext:(NSManagedObjectContext *)context;
-- (EmployeeMO *)insertWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary;
+- (EmployeeMO *)insertWithFirstName:(NSString *)firstName lastName:(NSString *)lastName salary:(int)salary dateOfBirth:(NSDate *)dateOfBirth;
 
 -(void)saveContext;
 

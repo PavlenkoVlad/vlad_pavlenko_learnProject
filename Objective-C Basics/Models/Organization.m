@@ -39,14 +39,14 @@
 
 - (void)addEmployeeWithName:(NSString *)name organization:(OrganizationMO *)organization{
     int salary = ((arc4random() % 490) + 10) * 10;
+    NSDate *dateOfBirth = [NSDate new];
     NSArray * arrayOfFullNameComponents = [name componentsSeparatedByString:@" "];
-    EmployeeMO *employee = [_employee insertWithFirstName:arrayOfFullNameComponents[0] lastName:arrayOfFullNameComponents[1] salary:salary];
+    EmployeeMO *employee = [_employee insertWithFirstName:arrayOfFullNameComponents[0] lastName:arrayOfFullNameComponents[1] salary:salary dateOfBirth:dateOfBirth];
     [self addEmployee:employee organization:organization];
 }
 
 - (void)addEmployee:(EmployeeMO *)employee organization:(OrganizationMO *)organization {
     [organization addEmployeesObject:employee];
-    //employee.organization = organization;
     [self saveContext];
 }
 
