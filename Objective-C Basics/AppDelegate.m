@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "Employee.h"
-#import "Organization.h"
+#import "MainViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,33 +17,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSString * firstName = @"firstName1";
-    NSString * lastName = @"lastName1";
-    int salary = 700;
-    Employee * employee = [[Employee alloc] initWithFirstName:firstName lastName:lastName salary:salary];
-    [employee printToNSLog];
-    
-    Organization *organization = [[Organization alloc] initWithName: @"organizationName"];
-    [organization printToNSLog];
-    
-    [organization addEmployeeWithName:@"firstName2 lastName2"];
-    [organization addEmployeeWithName:@"firstName3 lastName3"];
-    [organization printToNSLog];
-    
-    [organization addEmployee:employee];
-    [organization printToNSLog];
-    
-    double avarageSalary = [organization calculateAverageSalary];
-    NSLog(@"avarageSalary:%f", avarageSalary);
-    
-    Employee * emoloyeeLS = [organization employeeWithLowestSalary];
-    [emoloyeeLS printToNSLog];
-    
-    NSArray * employeesWithSalaryTolerance = [organization employeesWithSalary:700 tolerance:500];
-    NSLog(@"employeesWithSalaryTolerance:%@", employeesWithSalaryTolerance);
-    
-    [organization removeEmployee:employee];
-    [organization printToNSLog];
+    _persistentContainer = [self persistentContainer];
     
     return YES;
 }
@@ -66,5 +39,49 @@
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
 }
 
+#pragma mark - Core Data stack
+
+@synthesize persistentContainer = _persistentContainer;
+
+- (NSPersistentContainer *)persistentContainer {
+    // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
+    @synchronized (self) {
+        if (_persistentContainer == nil) {
+            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Model"];
+            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+                if (error != nil) {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    
+                    /*
+                     Typical reasons for an error here include:
+                     * The parent directory does not exist, cannot be created, or disallows writing.
+                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                     * The device is out of space.
+                     * The store could not be migrated to the current model version.
+                     Check the error message to determine what the actual problem was.
+                    */
+                    NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+                    abort();
+                }
+            }];
+        }
+    }
+    
+    return _persistentContainer;
+}
+
+#pragma mark - Core Data Saving support
+
+- (void)saveContext {
+    NSManagedObjectContext *context = self.persistentContainer.viewContext;
+    NSError *error = nil;
+    if ([context hasChanges] && ![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        abort();
+    }
+}
 
 @end

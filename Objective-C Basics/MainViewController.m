@@ -10,6 +10,10 @@
 #import "MainViewController.h"
 #import "DetailViewController.h"
 #import "CreateEmployeeViewController.h"
+#import "OrganizationMO+CoreDataClass.h"
+#import "EmployeeMO+CoreDataClass.h"
+#import "Organization.h"
+#import "AppDelegate.h"
 
 @interface MainViewController ()
 
@@ -18,26 +22,35 @@
 @implementation MainViewController
 
 @synthesize organization;
+@synthesize context;
+@synthesize organizationMO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
     
     [self initOrganization];
 }
 
 -(void)initOrganization {
-    organization = [[Organization alloc] initWithName: @"organizationName"];
-    [organization addEmployeeWithName:@"firstName1 lastName1"];
-    [organization addEmployeeWithName:@"firstName2 lastName2"];
-    [organization addEmployeeWithName:@"firstName3 lastName3"];
+    organization = [[Organization alloc] initWithContext:context];
+    NSError *error = nil;
+    NSArray *organizationMOArray = [context executeFetchRequest:[OrganizationMO fetchRequest] error: &error];
+    if (!organizationMOArray || organizationMOArray.count == 0) {
+        [self firstLaunchDataInit];
+    } else {
+        organizationMO = organizationMOArray[0];
+    }
 }
 
+-(void)firstLaunchDataInit {
+    organizationMO = [organization insertWithName:@"organization name"];
+    [organization addEmployeeWithName:@"firstName1 lastName1" organization:organizationMO];
+    [organization addEmployeeWithName:@"firstName2 lastName2" organization:organizationMO];
+    [organization addEmployeeWithName:@"firstName3 lastName3" organization:organizationMO];
+}
+ 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -45,37 +58,49 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return organization.employees.count;
+    return organizationMO.employees.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"employeeCell" forIndexPath:indexPath];
-    Employee *employee = organization.employees[indexPath.row];
+    EmployeeMO *employeeMO = [organizationMO.employees allObjects][indexPath.row];
     
-    cell.textLabel.text = employee.fullname;
+    cell.textLabel.text = employeeMO.fullName;
     
     return cell;
 }
 
-- (void)addEmployee:(Employee *)employee {
-    [organization addEmployee:employee];
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [organization removeEmployee:organizationMO.employees.allObjects[indexPath.row] organization:organizationMO];
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView endUpdates];
+    }
+}
+
+- (void)addEmployee:(EmployeeMO *)employeeMO {
+    [organization addEmployee:employeeMO organization:organizationMO];
     [self.tableView reloadData];
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     
     if ([segue.identifier compare:@"detailEmployee"] == NSOrderedSame) {
-        Employee *employee = organization.employees[self.tableView.indexPathForSelectedRow.row];
+        EmployeeMO *employeeMO = organizationMO.employees.allObjects[self.tableView.indexPathForSelectedRow.row];
         DetailViewController *detailViewController = (DetailViewController *) segue.destinationViewController;
         
-        detailViewController.employee = employee;
+        detailViewController.employeeMO = employeeMO;
     } else if ([segue.identifier compare:@"saveEmployee"] == NSOrderedSame) {
         CreateEmployeeViewController *createEmployeeViewController = (CreateEmployeeViewController *) segue.destinationViewController;
         createEmployeeViewController.delegate = self;
+        createEmployeeViewController.employee = organization.employee;
     }
 }
 

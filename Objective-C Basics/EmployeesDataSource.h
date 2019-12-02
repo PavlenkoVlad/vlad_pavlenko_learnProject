@@ -17,6 +17,6 @@
 @protocol EmployeesDataSource <NSObject>
 
 @required
-- (void) addEmployee:(Employee *)employee;
+- (void) addEmployee:(EmployeeMO *)employeeMO;
 
 @end

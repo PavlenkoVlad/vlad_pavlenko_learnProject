@@ -14,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MainViewController : UITableViewController<EmployeesDataSource>
 
-@property Organization * organization;
+@property Organization *organization;
+@property NSManagedObjectContext *context;
+@property OrganizationMO *organizationMO;
 
 @end
 
