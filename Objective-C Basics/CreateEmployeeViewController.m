@@ -39,7 +39,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier compare:@"saveEmployeeDone"] == NSOrderedSame) {
         if (firstNameTextField.text && firstNameTextField.text.length > 0 && lastNameTextField.text && lastNameTextField.text.length > 0 && salaryTextField.text && salaryTextField.text.length > 0) {
-            [delegate addEmployee:[employee insertWithFirstName:firstNameTextField.text lastName:lastNameTextField.text salary:salaryTextField.text.intValue dateOfBirth:hsDatePickerViewController.date]];
+            [delegate addEmployee:[employee insertWithFirstName:firstNameTextField.text lastName:lastNameTextField.text salary:salaryTextField.text.intValue dateOfBirth:dateOfBirth]];
         }
     }
 }

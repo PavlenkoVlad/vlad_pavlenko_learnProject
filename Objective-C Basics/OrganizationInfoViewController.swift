@@ -14,15 +14,22 @@ class OrganizationInfoViewController: UIViewController {
     
     var salarySumAlertController: UIAlertController!
     
+    @objc static let employeesOrderHasChanged = Notification.Name("OrganizationInfoViewController.employeesOrderHasChanged")
     @objc var organization: OrganizationMO!
     
     var salarySum: Int!
+    var employeesOrders = ["firstName", "lastName", "fullName", "salary", "dateOfBirth"]
+    private static var order: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         organizationInfoLabel.text = "Organization Name: \(organization.name!)"
         calculateSalarySum()
+    }
+    
+    @objc static func getOrder() -> String {
+        return order;
     }
     
     func calculateSalarySum() {
@@ -41,5 +48,11 @@ class OrganizationInfoViewController: UIViewController {
             salarySumAlertController.addAction(okAction)
             self.present(salarySumAlertController, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func randomizeButtonPressed(_ sender: UIButton) {
+        let randomIndex = Int.random(in: 0..<employeesOrders.count)
+        let employeeOrder = employeesOrders[randomIndex]
+        NotificationCenter.default.post(name: OrganizationInfoViewController.employeesOrderHasChanged, object: employeeOrder)
     }
 }

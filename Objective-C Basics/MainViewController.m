@@ -25,6 +25,8 @@
 @synthesize organization;
 @synthesize context;
 @synthesize organizationMO;
+@synthesize employeesArray;
+@synthesize order;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,9 +34,10 @@
     context = ((AppDelegate *)UIApplication.sharedApplication.delegate).persistentContainer.viewContext;
     
     [self initOrganization];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(sortEmployeesSetWithNotification:) name:OrganizationInfoViewController.employeesOrderHasChanged object:nil];
 }
 
--(void)initOrganization {
+- (void)initOrganization {
     organization = [[Organization alloc] initWithContext:context];
     NSError *error = nil;
     NSArray *organizationMOArray = [context executeFetchRequest:[OrganizationMO fetchRequest] error: &error];
@@ -43,9 +46,10 @@
     } else {
         organizationMO = organizationMOArray[0];
     }
+    employeesArray = [[NSMutableArray alloc] initWithArray:organizationMO.employees.allObjects];
 }
 
--(void)firstLaunchDataInit {
+- (void)firstLaunchDataInit {
     organizationMO = [organization insertWithName:@"organization name"];
     [organization addEmployeeWithName:@"firstName1 lastName1" organization:organizationMO];
     [organization addEmployeeWithName:@"firstName2 lastName2" organization:organizationMO];
@@ -59,12 +63,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return organizationMO.employees.count;
+    return employeesArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"employeeCell" forIndexPath:indexPath];
-    EmployeeMO *employeeMO = [organizationMO.employees allObjects][indexPath.row];
+    EmployeeMO *employeeMO = employeesArray[indexPath.row];
     
     cell.textLabel.text = employeeMO.fullName;
     
@@ -77,7 +81,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [organization removeEmployee:organizationMO.employees.allObjects[indexPath.row] organization:organizationMO];
+        EmployeeMO *employee = employeesArray[indexPath.row];
+        [organization removeEmployee:employee organization:organizationMO];
+        [employeesArray removeObject:employee];
+        [self sortEmployeesSetWithOrder];
         [tableView beginUpdates];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
@@ -86,15 +93,32 @@
 
 - (void)addEmployee:(EmployeeMO *)employeeMO {
     [organization addEmployee:employeeMO organization:organizationMO];
+    [employeesArray addObject:employeeMO];
+    [self sortEmployeesSetWithOrder];
     [self.tableView reloadData];
+}
+
+- (void)sortEmployeesSetWithNotification:(NSNotification *)notification {
+    NSString *order = (NSString *)notification.object;
+    self.order = order;
+    [self sortEmployeesSetWithOrder];
+    [self.tableView reloadData];
+}
+
+- (void)sortEmployeesSetWithOrder {
+    if (order) {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:order ascending:YES];
+        NSArray *sortDescriptorsArray = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        NSArray *sortedEmployees = [employeesArray sortedArrayUsingDescriptors:sortDescriptorsArray];
+        employeesArray = [[NSMutableArray alloc] initWithArray:sortedEmployees];
+    }
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     if ([segue.identifier compare:@"detailEmployee"] == NSOrderedSame) {
-        EmployeeMO *employeeMO = organizationMO.employees.allObjects[self.tableView.indexPathForSelectedRow.row];
+        EmployeeMO *employeeMO = employeesArray[self.tableView.indexPathForSelectedRow.row];
         DetailViewController *detailViewController = (DetailViewController *) segue.destinationViewController;
         
         detailViewController.employeeMO = employeeMO;
