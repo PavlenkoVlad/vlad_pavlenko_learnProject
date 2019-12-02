@@ -14,6 +14,7 @@
 #import "EmployeeMO+CoreDataClass.h"
 #import "Organization.h"
 #import "AppDelegate.h"
+#import <Objective_C_Basics-Swift.h>
 
 @interface MainViewController ()
 
@@ -101,6 +102,9 @@
         CreateEmployeeViewController *createEmployeeViewController = (CreateEmployeeViewController *) segue.destinationViewController;
         createEmployeeViewController.delegate = self;
         createEmployeeViewController.employee = organization.employee;
+    } else if ([segue.identifier compare:@"organizationInfo"] == NSOrderedSame) {
+        OrganizationInfoViewController *organizationInfoViewController = (OrganizationInfoViewController *) segue.destinationViewController;
+        organizationInfoViewController.organization = organizationMO;
     }
 }
 
