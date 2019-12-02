@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property Organization *organization;
 @property NSManagedObjectContext *context;
 @property OrganizationMO *organizationMO;
+@property NSMutableArray<EmployeeMO *> *employeesArray;
+@property (nullable) NSString *order;
 
 @end
 
