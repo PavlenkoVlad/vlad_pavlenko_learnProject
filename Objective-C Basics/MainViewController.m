@@ -35,6 +35,11 @@
     
     [self initOrganization];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(sortEmployeesSetWithNotification:) name:OrganizationInfoViewController.employeesOrderHasChanged object:nil];
+    /*
+    [RequestManagerObjc fetchOrganizationsWithCompletion:^(NSDictionary *test) {
+        NSLog(@"%@", test);
+    }];
+     */
 }
 
 - (void)initOrganization {

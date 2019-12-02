@@ -16,20 +16,14 @@ class OrganizationInfoViewController: UIViewController {
     
     @objc static let employeesOrderHasChanged = Notification.Name("OrganizationInfoViewController.employeesOrderHasChanged")
     @objc var organization: OrganizationMO!
-    
     var salarySum: Int!
     var employeesOrders = ["firstName", "lastName", "fullName", "salary", "dateOfBirth"]
-    private static var order: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         organizationInfoLabel.text = "Organization Name: \(organization.name!)"
         calculateSalarySum()
-    }
-    
-    @objc static func getOrder() -> String {
-        return order;
     }
     
     func calculateSalarySum() {
