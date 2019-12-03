@@ -3,3 +3,4 @@
 //
 #import "OrganizationMO+CoreDataClass.h"
 #import "EmployeeMO+CoreDataClass.h"
+#import "Employee.h"

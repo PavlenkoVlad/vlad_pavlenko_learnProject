@@ -35,11 +35,6 @@
     
     [self initOrganization];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(sortEmployeesSetWithNotification:) name:OrganizationInfoViewController.employeesOrderHasChanged object:nil];
-    /*
-    [RequestManagerObjc fetchOrganizationsWithCompletion:^(NSDictionary *test) {
-        NSLog(@"%@", test);
-    }];
-     */
 }
 
 - (void)initOrganization {
@@ -49,7 +44,7 @@
     if (!organizationMOArray || organizationMOArray.count == 0) {
         [self firstLaunchDataInit];
     } else {
-        organizationMO = organizationMOArray[0];
+        organizationMO = organizationMOArray[1];
     }
     employeesArray = [[NSMutableArray alloc] initWithArray:organizationMO.employees.allObjects];
 }
@@ -134,6 +129,7 @@
     } else if ([segue.identifier compare:@"organizationInfo"] == NSOrderedSame) {
         OrganizationInfoViewController *organizationInfoViewController = (OrganizationInfoViewController *) segue.destinationViewController;
         organizationInfoViewController.organization = organizationMO;
+        organizationInfoViewController.context = context;
     }
 }
 
