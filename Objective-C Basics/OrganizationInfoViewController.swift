@@ -58,6 +58,29 @@ class OrganizationInfoViewController: UIViewController {
         RequestManagerObjc.fetchOrganizations(completion: fetchOrganizationsParseResponse(response:))
     }
     
+    @IBAction func calculateFibonacciNumberPressed(_ sender: UIButton) {
+        SVProgressHUD.show()
+        DispatchQueue.global(qos: .background).async {
+            var n1:Int = 1
+            var n2:Int = 0
+            var n:Int = 0
+            for index in 2...10 {
+                n = n1 + n2
+                n2 = n1
+                n1 = n
+                if index % 3 == 0 {
+                    sleep(1)
+                }
+            }
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                let alert = UIAlertController(title: "Calculated 10th Fibonacci number: \(n)", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
     func fetchOrganizationsParseResponse(response:[String: AnyObject]) {
         guard let organizations = response["organizations"] as? NSArray else { return }
         
