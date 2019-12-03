@@ -68,9 +68,11 @@
                     <navigationItem key="navigationItem" id="ybR-W3-qcF"/>
                     <connections>
                         <outlet property="organizationInfoLabel" destination="cqM-wq-ei0" id="RFz-tv-jmH"/>
+                        <segue destination="msc-h4-SFm" kind="unwind" identifier="reloadOrganization" unwindAction="prepareForUnwind:" id="nQE-85-32k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vSS-Yw-tCm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="msc-h4-SFm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1325" y="773"/>
         </scene>

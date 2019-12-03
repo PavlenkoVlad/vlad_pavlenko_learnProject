@@ -44,7 +44,7 @@
     if (!organizationMOArray || organizationMOArray.count == 0) {
         [self firstLaunchDataInit];
     } else {
-        organizationMO = organizationMOArray[1];
+        organizationMO = organizationMOArray[0];
     }
     employeesArray = [[NSMutableArray alloc] initWithArray:organizationMO.employees.allObjects];
 }
@@ -134,7 +134,10 @@
 }
 
 - (IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
-    
+    if ([segue.identifier compare:@"reloadOrganization"] == NSOrderedSame) {
+        employeesArray = [[NSMutableArray alloc] initWithArray:organizationMO.employees.allObjects];
+        [self.tableView reloadData];
+    }
 }
 
 @end
