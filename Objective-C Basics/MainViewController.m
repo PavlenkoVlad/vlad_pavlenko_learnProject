@@ -129,11 +129,15 @@
     } else if ([segue.identifier compare:@"organizationInfo"] == NSOrderedSame) {
         OrganizationInfoViewController *organizationInfoViewController = (OrganizationInfoViewController *) segue.destinationViewController;
         organizationInfoViewController.organization = organizationMO;
+        organizationInfoViewController.context = context;
     }
 }
 
 - (IBAction)prepareForUnwind:(UIStoryboardSegue *)segue {
-    
+    if ([segue.identifier compare:@"reloadOrganization"] == NSOrderedSame) {
+        employeesArray = [[NSMutableArray alloc] initWithArray:organizationMO.employees.allObjects];
+        [self.tableView reloadData];
+    }
 }
 
 @end
